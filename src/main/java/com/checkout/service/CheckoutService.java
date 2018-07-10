@@ -20,8 +20,13 @@ public class CheckoutService {
 
 	public Map<String, BigDecimal> itemPrices;
 	
+	/**This would be nicer on the long run to lead out to a separate POJO where every item could have it's own discount*/
+	private final int appleDiscount = 2; //Every 2nd will be free
+	private final int orangeDiscount = 3; //Every 3rd will be free
+	
 	private DecimalFormat dF = new DecimalFormat(".##");
 
+	/**For the sake of the demo, let's fill it up manually instead of using any external resources.*/
 	@PostConstruct
 	private void init() {
 		itemPrices = new HashMap<String, BigDecimal>();
@@ -29,7 +34,12 @@ public class CheckoutService {
 		itemPrices.put("orange", new BigDecimal("0.25") );
 	}
 
+	
+	/**This calculates the sum of the prices of the items */
 	public String calculation(List<String> itemList) {
+		
+		int appleCounter = 1;
+		int orangeCounter = 1;
 
 		if (itemList == null || itemList.isEmpty())
 			return "Please give a list of items in the request";
@@ -38,6 +48,24 @@ public class CheckoutService {
 
 		// Looping through the user's items
 		for (String checkedItem : itemList) {
+			
+			if (checkedItem.toLowerCase().equals("apple")){
+				if (appleCounter < appleDiscount){
+					appleCounter++;
+				}else{
+					appleCounter = 1;
+					continue;
+				}
+				
+			}else if(checkedItem.toLowerCase().equals("orange")){
+				if (orangeCounter < orangeDiscount){
+					orangeCounter++;
+				}else{
+					orangeCounter = 1;
+					continue;
+				}
+			}
+			
 
 			// Calculating the price
 			for (Map.Entry<String, BigDecimal> itemPrice : itemPrices.entrySet()) {

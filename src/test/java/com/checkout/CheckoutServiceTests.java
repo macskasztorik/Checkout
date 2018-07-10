@@ -54,10 +54,16 @@ public class CheckoutServiceTests {
 	@Test
 	public void calculationTestValues() {
 		List<String> itemList = Arrays.asList("apple", "apple", "orange","orange");
-		assertEquals("Checking if calculation gives back correct values", "£ 1.70", checkoutService.calculation(itemList));
+		assertEquals("Checking if calculation gives back correct values", "£ 1.10", checkoutService.calculation(itemList));
 		
 		itemList = Arrays.asList("apple", "apple", "orange","orange","apple", "apple");
-		assertEquals("Checking if calculation gives back correct values", "£ 2.90", checkoutService.calculation(itemList));
+		assertEquals("Checking if calculation gives back correct values", "£ 1.70", checkoutService.calculation(itemList));
+		
+		itemList = Arrays.asList("apple", "apple", "orange","orange","apple", "apple", "orange");
+		assertEquals("Checking if calculation gives back correct values", "£ 1.70", checkoutService.calculation(itemList));
+		
+		itemList = Arrays.asList("orange", "orange", "orange","orange","apple", "apple", "orange", "orange");
+		assertEquals("Checking if calculation gives back correct values", "£ 1.60", checkoutService.calculation(itemList));
 	}
 
 }
