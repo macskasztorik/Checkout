@@ -21,6 +21,9 @@ Make sure to add an array to the body of the request, like:
 The response will appear like:
 > £ 1.45
 
+UPDATE (STEP 2):
+> Every second apple, and every 3rd orange is free from now. Customer satisfaction is important.
+
 # Where are the main files?
 
 Source Code of the logic:
